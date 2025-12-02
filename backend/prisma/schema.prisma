@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int             @id @default(autoincrement())
+  email         String          @unique
+  username      String          @unique
+  passwordHash  String          @map("password_hash")
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
+  
+  tasks         Task[]
+  voiceCommands VoiceCommand[]
+
+  @@map("users")
+}
+
+model Task {
+  id          Int       @id @default(autoincrement())
+  userId      Int       @map("user_id")
+  title       String
+  description String?
+  status      String    @default("To Do") // "To Do", "In Progress", "Completed"
+  priority    String    @default("Medium") // "Low", "Medium", "High", "Urgent"
+  dueDate     DateTime? @map("due_date")
+  createdVia  String    @default("manual") @map("created_via") // "manual", "voice"
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  voiceCommands VoiceCommand[]
+
+  @@index([userId])
+  @@index([status])
+  @@index([priority])
+  @@map("tasks")
+}
+
+model VoiceCommand {
+  id           Int      @id @default(autoincrement())
+  userId       Int      @map("user_id")
+  taskId       Int?     @map("task_id")
+  transcript   String
+  parsedData   Json?    @map("parsed_data")
+  success      Boolean  @default(true)
+  createdAt    DateTime @default(now()) @map("created_at")
+  
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  task Task? @relation(fields: [taskId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@map("voice_commands")
+}
