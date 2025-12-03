@@ -19,6 +19,7 @@ CREATE TABLE "tasks" (
     "status" TEXT NOT NULL DEFAULT 'To Do',
     "priority" TEXT NOT NULL DEFAULT 'Medium',
     "due_date" TIMESTAMP(3),
+    "due_time" TEXT,
     "created_via" TEXT NOT NULL DEFAULT 'manual',
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,

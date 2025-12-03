@@ -29,6 +29,7 @@ model Task {
   status      String    @default("To Do") // "To Do", "In Progress", "Completed"
   priority    String    @default("Medium") // "Low", "Medium", "High", "Urgent"
   dueDate     DateTime? @map("due_date")
+  dueTime     String?   @map("due_time") // Store time as "HH:MM" format
   createdVia  String    @default("manual") @map("created_via") // "manual", "voice"
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
