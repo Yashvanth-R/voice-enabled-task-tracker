@@ -41,6 +41,6 @@ A full-stack task management application with intelligent voice input capabiliti
 - **TypeScript** for type safety
 - **PostgreSQL** with **Prisma ORM**
 - **Socket.io** for real-time communication
-- **Hugging Face AI** (Mistral-7B) for intelligent parsing - **FREE!**
+- **Hugging Face AI** (Mistral-7B) for intelligent parsing
 - **JWT** authentication
 - **Zod** for validation
