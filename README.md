@@ -85,17 +85,6 @@ A full-stack task management application with intelligent voice input capabiliti
   - Takes 2 minutes, no credit card required
   - Token format: `hf_xxxxxxxxxxxxxxxxxxxxx`
 
-### Browser Requirements
-- **Chrome** (Recommended) - Full Web Speech API support
-- **Edge** - Full support
-- **Safari** - Full support
-- **Firefox** - ❌ No Web Speech API support
-
-### System Requirements
-- **RAM**: 4GB minimum (8GB recommended)
-- **Disk Space**: 2GB for Docker images
-- **OS**: Windows 10+, macOS 10.15+, or Linux
-
 ## Installation & Setup
 
 ### Step 1: Clone the Repository
@@ -196,7 +185,7 @@ Once all services are running:
 5. Review the parsed data
 6. Click "Create Task"
 
-## 🔄 Running Everything Locally
+## Running Everything Locally
 
 ### Using Docker Compose (Recommended)
 
@@ -647,11 +636,6 @@ docker-compose down
 
 # Remove volumes (reset database)
 docker-compose down -v
-
-# View logs
-docker-compose logs -f backend
-docker-compose logs -f frontend
-docker-compose logs -f postgres
 ```
 
 ### Backend Commands
@@ -672,7 +656,6 @@ cd frontend
 npm install         # Install dependencies
 npm run dev        # Start dev server (port 3000)
 npm run build      # Build for production
-npm run preview    # Preview production build
 ```
 
 ### Voice Recognition Not Working
