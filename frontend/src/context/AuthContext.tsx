@@ -52,16 +52,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const register = async (email: string, username: string, password: string) => {
     try {
-      const response = await api.post('/auth/register', { email, username, password });
-      const { user: userData, token: userToken } = response.data;
-
-      setUser(userData);
-      setToken(userToken);
-      localStorage.setItem('token', userToken);
-      localStorage.setItem('user', JSON.stringify(userData));
-      socketService.connect(userToken);
-
-      toast.success('Registration successful!');
+      await api.post('/auth/register', { email, username, password });
+      toast.success('Registration successful! Please log in.');
     } catch (error: any) {
       const message = error.response?.data?.error || 'Registration failed';
       toast.error(message);

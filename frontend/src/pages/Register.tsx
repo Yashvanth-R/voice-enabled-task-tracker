@@ -10,12 +10,14 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
   const { register } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccess(false);
 
     if (password !== confirmPassword) {
       setError('Passwords do not match');
@@ -26,7 +28,11 @@ const Register = () => {
 
     try {
       await register(email, username, password);
-      navigate('/dashboard');
+      setSuccess(true);
+      // Redirect to login page after 1.5 seconds
+      setTimeout(() => {
+        navigate('/login');
+      }, 1500);
     } catch (error: any) {
       const errorMessage = error.response?.data?.error || 'Registration failed. Please try again.';
       setError(errorMessage);
@@ -50,6 +56,12 @@ const Register = () => {
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
               {error}
+            </div>
+          )}
+          
+          {success && (
+            <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm">
+              Account created successfully! Redirecting to login...
             </div>
           )}
           
