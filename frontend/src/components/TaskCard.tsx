@@ -74,6 +74,11 @@ const TaskCard = ({ task, onEdit }: TaskCardProps) => {
           <div className="flex items-center gap-1 text-xs text-gray-600">
             <Calendar className="w-3 h-3" />
             {format(new Date(task.dueDate), 'MMM dd, yyyy')}
+            {task.dueTime && (
+              <span className="ml-1 text-primary-600 font-medium">
+                at {task.dueTime}
+              </span>
+            )}
           </div>
         )}
       </div>

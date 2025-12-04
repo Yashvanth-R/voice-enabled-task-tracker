@@ -31,6 +31,7 @@ const VoiceInputModal = ({ onClose, onSuccess }: VoiceInputModalProps) => {
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState<'Low' | 'Medium' | 'High' | 'Urgent'>('Medium');
   const [dueDate, setDueDate] = useState('');
+  const [dueTime, setDueTime] = useState('');
   const [status, setStatus] = useState<'To Do' | 'In Progress' | 'Completed'>('To Do');
 
   useEffect(() => {
@@ -64,6 +65,8 @@ const VoiceInputModal = ({ onClose, onSuccess }: VoiceInputModalProps) => {
       } else {
         setDueDate('');
       }
+      
+      setDueTime(parsed.dueTime || '');
 
       toast.success('Voice command parsed successfully!');
     } catch (error) {
@@ -89,6 +92,7 @@ const VoiceInputModal = ({ onClose, onSuccess }: VoiceInputModalProps) => {
         priority,
         status,
         dueDate: dueDate ? new Date(dueDate).toISOString() : null,
+        dueTime: dueTime || null,
         createdVia: 'voice'
       });
 
@@ -111,6 +115,7 @@ const VoiceInputModal = ({ onClose, onSuccess }: VoiceInputModalProps) => {
     setDescription('');
     setPriority('Medium');
     setDueDate('');
+    setDueTime('');
     setStatus('To Do');
   };
 
@@ -277,16 +282,30 @@ const VoiceInputModal = ({ onClose, onSuccess }: VoiceInputModalProps) => {
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Due Date
-                  </label>
-                  <input
-                    type="date"
-                    value={dueDate}
-                    onChange={(e) => setDueDate(e.target.value)}
-                    className="input"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Due Date
+                    </label>
+                    <input
+                      type="date"
+                      value={dueDate}
+                      onChange={(e) => setDueDate(e.target.value)}
+                      className="input"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Due Time
+                    </label>
+                    <input
+                      type="time"
+                      value={dueTime}
+                      onChange={(e) => setDueTime(e.target.value)}
+                      className="input"
+                    />
+                  </div>
                 </div>
               </div>
 
