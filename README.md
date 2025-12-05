@@ -20,7 +20,7 @@ A full-stack task management application with intelligent voice input capabiliti
 - **Priority Colors**: Visual priority indicators
 - **Due Date Tracking**: Calendar-based due dates
 
-### 🔐 Security & Auth
+### Security & Auth
 - JWT-based authentication
 - Secure password hashing
 - User data isolation
